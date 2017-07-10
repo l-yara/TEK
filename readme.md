@@ -2,6 +2,9 @@
 
 1. Main entry point is the Launcher class, please use it to run both Randomizer and Prime applications via something like
 ```bash
+# compile
+javac -d out/production/TEK $(find . -name "*.java")
+# run
 java -cp out/production/TEK yara.Launcher 1101 1102
 ```
 Two integers at the end of the sample (1101 and 1102) are the port numbers for Prime and Randomize application services. Use any two (but please do remember that port numbers less than 1024 require some special handling from root).
