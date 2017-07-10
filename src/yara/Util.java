@@ -21,7 +21,7 @@ public class Util {
         //expect exactly two parameters: port for Randomizer -> Prime and port for Prime -> Randomizer
         if (args.length != 2) {
             logger.warning("expecting exactly 2 parameters, got " + Arrays.toString(args));
-            System.exit(1);
+            throw new IllegalArgumentException("expected exactly 2 parameters");
         }
         return new int[]{Integer.parseInt(args[0]), Integer.parseInt(args[1])};
     }

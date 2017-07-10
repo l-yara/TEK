@@ -15,7 +15,7 @@ public class Randomizer {
 
     //2 thread will be enough: for periodical "send random int to Prime" and for
     // "receive data from Prime" tsk in the separate thread
-    private final ScheduledThreadPoolExecutor executor = new DaemonScheduler(2);
+    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
     private final Random random = new Random(new Date().getTime());
 
@@ -57,7 +57,7 @@ public class Randomizer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         int[] ports = Util.parsePortNumbers(args);
-        Randomizer instance = new Randomizer(ports[0], ports[1], 120);
+        Randomizer instance = new Randomizer(ports[0], ports[1], 50);
         instance.start();
     }
 

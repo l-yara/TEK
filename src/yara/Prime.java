@@ -13,7 +13,7 @@ public class Prime {
     private final int randomizerPort;
 
     //threads to use for parallel calculations
-    private final ScheduledThreadPoolExecutor executor = new DaemonScheduler(20);
+    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(20);
 
     public Prime(int primePort, int randomizerPort) {
         this.primePort = primePort;
@@ -31,7 +31,6 @@ public class Prime {
         try (Server<Integer> server = new Server<>(primePort, "Prime", Integer.class);
              Client<AnswerVO> client = new Client<>(randomizerPort, "Prime")) {
             //on each incoming value, schedule isPrime(...) check in a separate thread
-            //(sending data back must be synchronized between threads as client is not thread-safe)
             server.processInput(i -> executor.execute(() -> {
                 logger.info("got " + i);
                 AnswerVO answerVO = new AnswerVO(i, isPrime(i));
@@ -43,18 +42,13 @@ public class Prime {
     }
 
     boolean isPrime(int n) {
-        // fast even test.
-        if (n > 2 && (n & 1) == 0)
+        // fast even test
+        if (n <= 2 || (n & 1) == 0)
             return false;
         // only odd factors need to be tested up to n^0.5
         for (int i = 3; i * i <= n; i += 2)
             if (n % i == 0)
                 return false;
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return true;
     }
 

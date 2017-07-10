@@ -32,7 +32,7 @@ public class Client<T extends Serializable> implements AutoCloseable {
 
     }
 
-    //do synchronize as needed as this method is NOT thread-safe!
+    //send value to server
     public void send(T value) {
         try {
             outputStream.writeObject(value);
