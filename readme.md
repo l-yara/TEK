@@ -11,7 +11,7 @@ Two integers at the end of the sample (1101 and 1102) are the port numbers for P
 
 Press Enter twice in console to stop both applications correctly (releasing ports).
 
-2. As I plan to deploy this on Git, I do not mention the company name anywhere in code/comments/package or class names to hide this solution from goggling.
+2. As I plan to deploy this on Git, I do not mention the company name anywhere in code/comments/package or class names to hide this solution from googling.
 
 3. As it was specified that information will be passed via some sort of "distributed queues" but I was limited to "use only the standard Java library", I made an assumption that I need to simulate such "distributed queue". The named pipes was the initial choice but I've switched to the Sockets as I wanted the system to be an OS-agnostic (named pipes are not too good to Windows). Finally, the queue is simulated via Socket connections between Client and Server in both Randomizer -> Prime and Prime -> Randomizer channels.
 
